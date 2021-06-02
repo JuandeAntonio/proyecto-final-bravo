@@ -23,9 +23,9 @@ class JugadorFactory extends Factory
     public function definition()
     {
         return [
-            'nombre' => $this->faker->unique()->word(10),
+            'nombre' => $this->faker->unique()->name(),
             'apellidos' =>$this->faker->word(15),
-            'dorsal' => $this->faker->unique()->numberBetween($min = 1, $max = 99),
+            'dorsal' => $this->faker->unique()->numberBetween($min = 1, $max = 999),
             'equipo_id' => Equipo::factory()
         ];
     }

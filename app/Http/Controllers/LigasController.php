@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Equipo;
 
 use Illuminate\Http\Request;
+use App\Models\Liga;
 
-class EquiposController extends Controller
+class LigasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class EquiposController extends Controller
      */
     public function index()
     {
-        $equipos = Equipo::all();
-        $liga2 = Equipo::where('liga_id', 1)->get();
-        return view('admin.equipo.index')->with('equipos', $equipos);
+        $ligas = Liga::all();
+        return view('admin.liga.index')->with('ligas',$ligas);
     }
 
     /**
@@ -26,7 +25,8 @@ class EquiposController extends Controller
      */
     public function create()
     {
-        return view('admin.equipo.create');
+        return view('admin.liga.create');
+
     }
 
     /**
@@ -37,15 +37,13 @@ class EquiposController extends Controller
      */
     public function store(Request $request)
     {
-        $equipos = new Equipo();
-        $equipos->nombre = $request->get('nombre');
-        $equipos->direccion = $request->get('direccion');
-        $equipos->telefono = $request->get('telefono');
-        $equipos->liga_id = $request->get('liga_id');
+        $ligas = new Liga();
+        $ligas->nombre = $request->get('nombre');
+        $ligas->categoria = $request->get('categoria');
 
-        $equipos->save();
+        $ligas->save();
 
-        return redirect('/admin/equipos');
+        return redirect('/admin/ligas');
     }
 
     /**
@@ -67,8 +65,8 @@ class EquiposController extends Controller
      */
     public function edit($id)
     {
-        $equipo = Equipo::find($id);
-        return view ('admin.equipo.edit')->with('equipo',$equipo);
+        $liga = Liga::find($id);
+        return view ('admin.liga.edit')->with('liga',$liga);
     }
 
     /**
@@ -80,16 +78,12 @@ class EquiposController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $equipo = Equipo::find($id);
-        $equipo->nombre = $request->get('nombre');
-        $equipo->direccion = $request->get('direccion');
-        $equipo->telefono = $request->get('telefono');
-        $equipo->liga_id = $request->get('liga_id');
+        $liga = Liga::find($id);
+        $liga->nombre = $request->get('nombre');
+        $liga->categoria = $request->get('categoria');
+        $liga->save();
 
-        $equipo->save();
-
-        return redirect('/admin/equipos');
-    
+        return redirect('/admin/ligas');
     }
 
     /**

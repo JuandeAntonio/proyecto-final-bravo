@@ -19,7 +19,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+    return view('admin');
+})->name('admin');
 
-Route::get('/equipos', 'App\Http\Controllers\EquiposController@index');
+//Route::resource('/equipos', 'App\Http\Controllers\EquiposController');
+
+//Route::resource('/admin/liga/index', 'App\Http\Controllers\LigasController');
