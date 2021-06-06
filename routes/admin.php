@@ -10,4 +10,10 @@ Route::get('', [HomeController::class, 'index']);
 
 Route::resource('/ligas', 'App\Http\Controllers\LigasController');
 
-Route::resource('/equipos', 'App\Http\COntrollers\EquiposController');
+Route::resource('/equipos', 'App\Http\Controllers\EquiposController');
+
+Route::resource('/partidos', 'App\Http\Controllers\PartidosController');
+
+Route::resource('/jugadors', 'App\Http\Controllers\JugadoresController');
+
+Route::resource('/arbitros', 'App\Http\Controllers\ArbitrosController');

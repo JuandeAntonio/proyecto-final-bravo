@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Models\Equipo;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
+use Livewire\WithPagination;
+
 class EquiposController extends Controller
 {
+    
+    use WithPagination;
+    
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +21,6 @@ class EquiposController extends Controller
     public function index()
     {
         $equipos = Equipo::all();
-        $liga2 = Equipo::where('liga_id', 1)->get();
         return view('admin.equipo.index')->with('equipos', $equipos);
     }
 
@@ -100,6 +105,18 @@ class EquiposController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $equipo = Equipo::find($id);
+        $equipo->delete();
+        return redirect('/admin/equipos');
+    }
+
+    
+    public static function nombre_equipo($equipo_id){
+        $var = DB::select('select nombre from equipos where id = '.$equipo_id.';');
+        return $var;
+    }
+    public static function todos_equipos(){
+        $equipos = Equipo::all();
+        return $equipos;
     }
 }

@@ -1,9 +1,13 @@
+@inject('ligas', 'App\Http\Controllers\LigasController')
+<?php
+    $todasligas = $ligas->nombres_liga();
+?>
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>CREAR UN NUEVO EQUIPO</h1>
+    <h1 class="text-center">CREAR UN NUEVO EQUIPO</h1>
 @stop
 
 <!--AQUÍ ES DONDE SE MUESTRA EL COTENIDO DE LA PAGINA -->
@@ -23,8 +27,12 @@
             <input type="text" class="form-control" id="telefono" name="telefono" placeholder="676771423">
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Liga ID</label>
-            <input type="text" class="form-control" id="liga_id" name="liga_id" placeholder="3">
+            <label for="" class="form-label">Nombre de la Liga</label>
+            <select name="equipo_id" id="equipo_id" class="form-control">
+                @foreach ($todasligas as $liga)
+                <option value="{{$liga->id}}">{{$liga->nombre}}</option>
+                @endforeach
+            </select>
         </div>
         <a href="/admin/equipos" class="btn btn-secondary" tabindex="5">Cancelar</a>
         <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>

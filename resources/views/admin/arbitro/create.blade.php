@@ -3,22 +3,22 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h2 class="text-center">CREAR DE UNA NUEVA LIGA</h2>
+    <h1 class="text-center">CREAR UN NUEVO ARBITRO</h1>
 @stop
 
 <!--AQUÍ ES DONDE SE MUESTRA EL COTENIDO DE LA PAGINA -->
 @section('content')
-    <form action="/admin/ligas" method="POST">
+    <form action="/admin/arbitro" method="POST">
     @csrf
         <div class="mb-3">
-            <label for="" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Liga Nacional Masculina">
+            <label for="" class="form-label">Nombre de Guerra</label>
+            <input type="text" class="form-control" id="nombre_guerra" name="nombre_guerra" placeholder="Santa Maria del Pilar">
         </div>
         <div class="mb-3">
-            <label for="" class="form-label">Categoria</label>
-            <input type="text" class="form-control" id="categoria" name="categoria" placeholder="Senior">
+            <label for="" class="form-label">Telefono</label>
+            <input type="text" class="form-control" id="telefono" name="telefono" placeholder="676771423">
         </div>
-        <a href="/admin/ligas" class="btn btn-secondary" tabindex="5">Cancelar</a>
+        <a href="/admin/arbitros" class="btn btn-secondary" tabindex="5">Cancelar</a>
         <button type="submit" class="btn btn-primary" tabindex="4">Guardar</button>
     </form>
 

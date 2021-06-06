@@ -3,21 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Partido;
-use App\Models\Jugador;
+use Illuminate\Support\Facades\DB;
+use App\Models\Equipo;
+use App\Models\Estadistica;
 
-
-class JugadoresController extends Controller
+class EstadisticasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $jugadors = Jugador::all();
-        return view('admin.jugador.index')->with('jugadors', $jugadors);
+    public function index($nombreliga)
+    {          
+        $var = DB::select('select * from estadisticas where equipo_id in (select id from equipos where liga_id in (select id from ligas where nombre like "'.$nombreliga.'")) order by puntos desc;');
+        return view('clasificaciones.index')->with('estadisticas', $var);
     }
 
     /**
@@ -27,7 +27,7 @@ class JugadoresController extends Controller
      */
     public function create()
     {
-        return view('admin.jugador.create');
+        //
     }
 
     /**
@@ -38,15 +38,7 @@ class JugadoresController extends Controller
      */
     public function store(Request $request)
     {
-        $equipos = new Jugador();
-        $equipos->nombre = $request->get('nombre');
-        $equipos->apellidos = $request->get('apellidos');
-        $equipos->dorsal = $request->get('dorsal');
-        $equipos->equipo_id = $request->get('equipo_id');
-
-        $equipos->save();
-
-        return redirect('/admin/jugadors');
+        //
     }
 
     /**
@@ -68,8 +60,7 @@ class JugadoresController extends Controller
      */
     public function edit($id)
     {
-        $jugador = Jugador::find($id);
-        return view ('admin.jugador.edit')->with('jugador',$jugador);
+        //
     }
 
     /**
@@ -81,15 +72,7 @@ class JugadoresController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $jugador = Jugador::find($id);
-        $jugador->nombre = $request->get('nombre');
-        $jugador->apellidos = $request->get('apellidos');
-        $jugador->dorsal = $request->get('dorsal');
-        $jugador->equipo_id = $request->get('equipo_id');
-
-        $jugador->save();
-
-        return redirect('/admin/jugadors');
+        //
     }
 
     /**

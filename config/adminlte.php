@@ -226,7 +226,7 @@ return [
     'menu' => [
         [
             'text' => 'search',
-            'search' => true,
+            'search' => false,
             'topnav' => true,
         ],
         [
@@ -254,20 +254,26 @@ return [
             'icon_color' => 'info',
         ],
         [
-            'text' => 'Jornadas',
-            'url'  => '#',
+            'text' => 'Partidos',
+            'url'  => 'admin/partidos',
             'icon' => 'fas fa-fw fa-calendar-week',
             'icon_color' => 'info',
         ],
         [
+            'text' => 'Jugadores',
+            'url'  => 'admin/jugadors',
+            'icon' => 'fas fa-fw fa-user',
+            'icon_color' => 'info',
+        ],
+        [
             'text' => 'Arbitros',
-            'url'  => '#',
+            'url'  => 'admin/arbitros',
             'icon' => 'fas fa-fw fa-address-book',
             'icon_color' => 'info',
         ],
         [
             'text' => 'Equipos',
-            'url'  => '#',
+            'url'  => 'admin/equipos',
             'icon' => 'fas fa-fw fa-users',
             'icon_color' => 'info',
         ],

@@ -18,9 +18,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
+Route::resource('clasificaciones/{nombreliga}', 'App\Http\Controllers\EstadisticasController', ['parameters' => [
+    '{nombreliga}' => 'nombre'
+]]);
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('admin');
-})->name('admin');
+    return view('welcome');
+})->name('welcome');
 
 //Route::resource('/equipos', 'App\Http\Controllers\EquiposController');
 

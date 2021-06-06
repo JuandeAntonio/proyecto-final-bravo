@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Liga;
+use Illuminate\Support\Facades\DB;
 
 class LigasController extends Controller
 {
@@ -95,5 +96,14 @@ class LigasController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public static function nombre_liga($liga_id){
+        $var = DB::select('select nombre from ligas where id = '.$liga_id.';');
+        return $var;
+    }
+
+    public static function nombres_liga(){
+        $nom_liga = Liga::all();
+        return $nom_liga;
     }
 }
