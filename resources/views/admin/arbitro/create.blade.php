@@ -8,7 +8,7 @@
 
 <!--AQUÍ ES DONDE SE MUESTRA EL COTENIDO DE LA PAGINA -->
 @section('content')
-    <form action="/admin/arbitro" method="POST">
+    <form action="/admin/arbitros" method="POST">
     @csrf
         <div class="mb-3">
             <label for="" class="form-label">Nombre de Guerra</label>

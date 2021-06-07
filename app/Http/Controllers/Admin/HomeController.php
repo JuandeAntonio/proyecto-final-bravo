@@ -10,7 +10,5 @@ class HomeController extends Controller
     public function index(){
         return view('admin.index');
     }
-    /*public function ligas(){
-        return view ('admin.ligas');
-    }*/
+
 }

@@ -30,6 +30,4 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('welcome');
 })->name('welcome');
 
-//Route::resource('/equipos', 'App\Http\Controllers\EquiposController');
-
-//Route::resource('/admin/liga/index', 'App\Http\Controllers\LigasController');
+Route::post('/arbitro', 'App\Http\Controllers\Arbitro\HomeController@index');

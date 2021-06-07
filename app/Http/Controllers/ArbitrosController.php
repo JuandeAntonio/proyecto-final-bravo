@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Arbitro;
+use App\Models\User;
 
 class ArbitrosController extends Controller
 {
@@ -40,6 +41,13 @@ class ArbitrosController extends Controller
         $arbitros->nombre_guerra = $request->get('nombre_guerra');
         $arbitros->telefono = $request->get('telefono');
         $arbitros->save();
+
+        $arbitros_user = new User();
+        $arbitros_user->name = $request->get('nombre_guerra');
+        $arbitros_user->email = $request->get('nombre_guerra')."@gmail.com";
+        $arbitros_user->password =bcrypt("A123a456");
+        $arbitros_user->assignRole('Arbitro');
+        $arbitros_user->save();
 
         return redirect('/admin/arbitros');
     }
