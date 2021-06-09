@@ -25,5 +25,7 @@ class DatabaseSeeder extends Seeder
         //Liga::factory()->has(Equipo::factory()->count(8))->create();
 
         Liga::factory()->has(Equipo::factory()->has(Jugador::factory()->count(12))->count(8))->create();
+        Liga::factory()->has(Equipo::factory()->has(Jugador::factory()->count(12))->count(8))->create();
+
     }
 }

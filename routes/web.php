@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,8 +19,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/welcome', function () {
+    return view('welcome');
+});
 
-Route::get('/equipos', 'App\Http\Controllers\EquiposController@index');
+
+Route::resource('clasificaciones/{nombreliga}', 'App\Http\Controllers\EstadisticasController', ['parameters' => [
+    '{nombreliga}' => 'nombre'
+]]);
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('welcome');
+})->name('welcome');
+
+
+Auth::routes(["register" => false]);
+
+

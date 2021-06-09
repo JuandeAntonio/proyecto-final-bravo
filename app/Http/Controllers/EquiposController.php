@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 use App\Models\Equipo;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
+use Livewire\WithPagination;
+
 class EquiposController extends Controller
 {
+    
+    use WithPagination;
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,9 +20,8 @@ class EquiposController extends Controller
      */
     public function index()
     {
-        $liga1 = Equipo::all();
-        $liga2 = Equipo::where('liga_id', 1)->get();
-        return view('equipos')->with('equipos', $liga2);
+        $equipos = Equipo::all();
+        return view('admin.equipo.index')->with('equipos', $equipos);
     }
 
     /**
@@ -26,7 +31,7 @@ class EquiposController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.equipo.create');
     }
 
     /**
@@ -37,7 +42,15 @@ class EquiposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $equipos = new Equipo();
+        $equipos->nombre = $request->get('nombre');
+        $equipos->direccion = $request->get('direccion');
+        $equipos->telefono = $request->get('telefono');
+        $equipos->liga_id = $request->get('liga_id');
+
+        $equipos->save();
+
+        return redirect('/admin/equipos');
     }
 
     /**
@@ -59,7 +72,8 @@ class EquiposController extends Controller
      */
     public function edit($id)
     {
-        //
+        $equipo = Equipo::find($id);
+        return view ('admin.equipo.edit')->with('equipo',$equipo);
     }
 
     /**
@@ -71,7 +85,16 @@ class EquiposController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $equipo = Equipo::find($id);
+        $equipo->nombre = $request->get('nombre');
+        $equipo->direccion = $request->get('direccion');
+        $equipo->telefono = $request->get('telefono');
+        $equipo->liga_id = $request->get('liga_id');
+
+        $equipo->save();
+
+        return redirect('/admin/equipos');
+    
     }
 
     /**
@@ -82,6 +105,18 @@ class EquiposController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $equipo = Equipo::find($id);
+        $equipo->delete();
+        return redirect('/admin/equipos');
+    }
+
+    
+    public static function nombre_equipo($equipo_id){
+        $var = DB::select('select nombre from equipos where id = '.$equipo_id.';');
+        return $var;
+    }
+    public static function todos_equipos(){
+        $equipos = Equipo::all();
+        return $equipos;
     }
 }
