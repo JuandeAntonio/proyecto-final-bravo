@@ -2,38 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Equipo;
-use App\Models\Estadistica;
 use Illuminate\Http\Request;
+use App\Models\Partido;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
 
-class EstadisticasController extends Controller
+class AsignacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nombreliga)
-    {   
-        $idlg = DB::select("select id from ligas where nombre like '".$nombreliga."';");
-        $idliga = $idlg[0]->id;
-        $numjor = DB::select('select count(distinct jornada) as num from partidos where liga_id = '.$idliga.';'); 
-        $numerojornadas = $numjor[0]->num;      
-        $var = DB::select('select * from estadisticas where equipo_id in (select id from equipos where liga_id in (select id from ligas where nombre like "'.$nombreliga.'")) order by puntos desc;');
-        $todaslasjornadas = [];
-        for($i=0; $i<=$numerojornadas; $i++){
-            $consulta = DB::select("select * from partidos where liga_id = ".$idliga." and jornada = ".$i.";");
-            array_push($todaslasjornadas,$consulta);
-        }
-        /*
-        return Response::json(array(
-            'succes' => true,
-            'data' => $todaslasjornadas[1][0]
-        ), 200);*/
-
-        return view('clasificaciones.index')->with('estadisticas', $var)->with('nombreliga',$nombreliga)->with('todaslasjornadas',$todaslasjornadas);
+    public function index()
+    {
+        $asignaciones = Partido::where('arbitros_id', 4)->get();
+        return view('admin.asignaciones.index')->with('asignaciones',$asignaciones);
     }
 
     /**
@@ -76,7 +59,17 @@ class EstadisticasController extends Controller
      */
     public function edit($id)
     {
-        //
+        $asignacion = Partido::find($id);
+        $equipo_visitante = DB::select('select equipo_visitante_id from partidos where id ='.$id.';');
+        $nombre_equipo_visitante = $equipo_visitante[0]->equipo_visitante_id;
+        $equipo_local = DB::select('select equipo_local_id from partidos where id ='.$id.';');
+        $nombre_equipo_local = $equipo_local[0]->equipo_local_id;
+        $jugadores_visitantes = DB::select('select nombre from jugadors where equipo_id ='.$nombre_equipo_visitante.';');
+        $jugadores_locales = DB::select('select nombre from jugadors where equipo_id ='.$nombre_equipo_local.';');
+        return view ('admin.asignaciones.edit')
+            ->with('asignacion',$asignacion)
+            ->with('jugadores_visitantes',$jugadores_visitantes)
+            ->with('jugadores_locales',$jugadores_locales);
     }
 
     /**
@@ -88,7 +81,12 @@ class EstadisticasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $partido = Partido::find($id);
+        $partido->sets_equipo_local = $request->get('marcador_set_local');
+        $partido->sets_equipo_visitante = $request->get('marcador_set_visitante');
+        $partido->save();
+
+        return redirect('/admin/asignaciones');
     }
 
     /**

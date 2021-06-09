@@ -34,7 +34,7 @@
                             <td>{{$equipo->telefono}}</td>
                             <td>{{($ligas->nombre_liga($equipo->liga_id))[0]->nombre}}</td>
                             <td>
-                                <form action="{{route ('equipos.destroy',$equipo->id)}}" method="POST">
+                                <form action="{{route('admin.equipos.destroy',$equipo->id)}}" method="POST">
                                     <a href="equipos/{{$equipo->id}}/edit" class="btn btn-info">Editar</a>
                                     @csrf
                                     @method('DELETE')

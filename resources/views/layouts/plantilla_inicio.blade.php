@@ -19,7 +19,7 @@
                     <nav class="navbar navbar-expand-md navbar-dark db-dark flex-md-column flex-row align-items-center py-2 text-center sticky-top" id="sidebar">
                         <div class="text-center p-3">
                         <img src="{{URL::asset('/img/volei.png')}}" alt="web picture" class="img-fluid my-3 ml-3 d-none d-md-block shadow" height="120" width="120">
-                        <a href="/welcome" class="navbar-brand mx-o font-weight-bold text-nowrap">WebVoleibol</a>
+                        <a href="/welcome" class="navbar-brand mx-o font-weight-bold text-nowrap">TodoVoleibol</a>
                         </div>
                         <button type="button" class="navbar-toggler border-0 order-1" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
                                 @if (Route::has('login'))
                                     <div class="">
                                         @auth
-                                            <a href="{{ url('/dashboard') }}" class="text-muted">Dashboard</a>
+                                            <a href="{{ url('/admin') }}" class="text-muted">Admin</a>
                                         @else
                                             <a href="{{ route('login') }}" class="text-muted">Log in</a>
 

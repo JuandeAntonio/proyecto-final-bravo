@@ -190,7 +190,7 @@ return [
     'dashboard_url' => 'admin',
     'logout_url' => 'logout',
     'login_url' => 'login',
-    'register_url' => 'register',
+    'register_url' => false,
     'password_reset_url' => 'password/reset',
     'password_email_url' => 'password/email',
     'profile_url' => false,
@@ -246,37 +246,43 @@ return [
             'url'  => 'admin',
             'icon' => 'fas fa-fw fa-home',
             'icon_color' => 'info',
+            'can' => 'Dashboard'
         ],
         [
             'text' => 'Ligas',
             'url'  => 'admin/ligas',
             'icon' => 'fas fa-fw fa-trophy',
             'icon_color' => 'info',
+            'can' => 'Dashboard'
         ],
         [
             'text' => 'Partidos',
             'url'  => 'admin/partidos',
             'icon' => 'fas fa-fw fa-calendar-week',
             'icon_color' => 'info',
+            'can' => 'Dashboard'
         ],
         [
             'text' => 'Jugadores',
             'url'  => 'admin/jugadors',
             'icon' => 'fas fa-fw fa-user',
             'icon_color' => 'info',
+            'can' => 'Dashboard'
         ],
         [
             'text' => 'Arbitros',
             'url'  => 'admin/arbitros',
             'icon' => 'fas fa-fw fa-address-book',
             'icon_color' => 'info',
+            'can' => 'Dashboard'
         ],
         [
             'text' => 'Equipos',
             'url'  => 'admin/equipos',
             'icon' => 'fas fa-fw fa-users',
             'icon_color' => 'info',
-        ],
+            'can' => 'Dashboard'
+        ],/*
         ['header' => 'CONFIGURACIÓN DE CUENTA'],
         [
             'text' => 'profile',
@@ -287,7 +293,7 @@ return [
             'text' => 'change_password',
             'url'  => 'admin/settings',
             'icon' => 'fas fa-fw fa-lock',
-        ],
+        ],*/
         /*[
             'text'    => 'multilevel',
             'icon'    => 'fas fa-fw fa-share',
@@ -326,21 +332,24 @@ return [
                 ],
             ],
         ],*/
-        ['header' => 'labels'],
+        ['header' => 'ARBITROS'],
         [
-            'text'       => 'important',
+            'text'       => 'Asignaciones',
             'icon_color' => 'red',
-            'url'        => '#',
+            'url'        => '/admin/asignaciones',
+            'can' => 'Asignaciones'
         ],
         [
             'text'       => 'warning',
             'icon_color' => 'yellow',
             'url'        => '#',
+            'can' => 'Asignaciones'
         ],
         [
             'text'       => 'information',
             'icon_color' => 'cyan',
             'url'        => '#',
+            'can' => 'Asignaciones'
         ],
     ],
 

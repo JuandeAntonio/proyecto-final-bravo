@@ -34,8 +34,12 @@
                             <td>{{$jugador->dorsal}}</td>
                             <td>{{($equipos->nombre_equipo($jugador->equipo_id))[0]->nombre}}</td>
                             <td>
-                                <a href="jugadors/{{$jugador->id}}/edit" class="btn btn-info">Editar</a>
-                                <button class="btn btn-danger">Borrar</button>
+                                <form action="{{route('admin.jugadors.destroy', $jugador->id)}}" method="POST">
+                                    <a href="jugadors/{{$jugador->id}}/edit" class="btn btn-info">Editar</a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Borrar</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

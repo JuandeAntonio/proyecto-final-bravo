@@ -28,12 +28,23 @@ use \App\Http\Controllers\PartidosController;
                     <td>{{$liga->nombre}}</td>
                     <td>{{$liga->categoria}}</td>
                     <td>
-                        <a href="ligas/{{$liga->id}}/edit" class="btn btn-info">Editar</a>
-                        <button class="btn btn-danger">Borrar</button>
-                        <button class="btn btn-success" onclick="generar_partidos()">Crear Partidos</button>
+                        <form action="{{route('admin.ligas.destroy',$liga->id)}}" method="POST">
+                            <a href="ligas/{{$liga->id}}/edit" class="btn btn-info">Editar</a>
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger">Borrar</button>
+                        </form>
+                        <form action="{{route('admin.generarpartido',$liga->id)}}" method="POST">
+                            @csrf
+                            <input type="number" hidden value="{{$liga->id}}" name="liga_id" />
+                            <button type="submit" class="btn btn-success">Crear partidos</button> 
+                        </form>
                     </td>
                 </tr>
             @endforeach
+            @isset($mensaje)
+            <h3 class="text-center text-info">{{$mensaje}}</h3>
+        @endisset
         </tbody>    
     </table>
 @stop
@@ -44,10 +55,35 @@ use \App\Http\Controllers\PartidosController;
 @stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script>
+        //PASAR EL VALOR DE LA LIGA POR PARAMETRO
+        //LLAMAR A LA FUNCIÓN DEL CONTROLADOR Y PASARLE EL PARAMETRO
+        //ASINCRONIA, CALLBACK?
+        //RESPONSE
         function generar_partidos(){
             alert('Hello');
+
         }
+
+        $.ajax({
+            method: "POST",
+            url: "admin/ligas",
+            data: {}
+        })
+        .done(function( response ) {
+        alert(response);
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '\app\Http\Controllers\PartidosController.php',
+            data: $(this).serialize(),
+            success: function(response)
+            {
+                alert(respone)
+            }
+       });
     </script>
 @stop

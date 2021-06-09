@@ -1,39 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\arbitro;
 
-use App\Models\Equipo;
-use App\Models\Estadistica;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Response;
 
-class EstadisticasController extends Controller
+class AsignacionesController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($nombreliga)
-    {   
-        $idlg = DB::select("select id from ligas where nombre like '".$nombreliga."';");
-        $idliga = $idlg[0]->id;
-        $numjor = DB::select('select count(distinct jornada) as num from partidos where liga_id = '.$idliga.';'); 
-        $numerojornadas = $numjor[0]->num;      
-        $var = DB::select('select * from estadisticas where equipo_id in (select id from equipos where liga_id in (select id from ligas where nombre like "'.$nombreliga.'")) order by puntos desc;');
-        $todaslasjornadas = [];
-        for($i=0; $i<=$numerojornadas; $i++){
-            $consulta = DB::select("select * from partidos where liga_id = ".$idliga." and jornada = ".$i.";");
-            array_push($todaslasjornadas,$consulta);
-        }
-        /*
-        return Response::json(array(
-            'succes' => true,
-            'data' => $todaslasjornadas[1][0]
-        ), 200);*/
-
-        return view('clasificaciones.index')->with('estadisticas', $var)->with('nombreliga',$nombreliga)->with('todaslasjornadas',$todaslasjornadas);
+    public function index()
+    {
+        return view('arbitro.asignaciones.index');
+        echo('hola');
     }
 
     /**

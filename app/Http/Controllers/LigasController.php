@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Liga;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 
 class LigasController extends Controller
 {
@@ -27,7 +28,6 @@ class LigasController extends Controller
     public function create()
     {
         return view('admin.liga.create');
-
     }
 
     /**

@@ -30,8 +30,12 @@
                             <td>{{$arbitro->nombre_guerra}}</td>
                             <td>{{$arbitro->telefono}}</td>
                             <td>
-                                <a href="arbitros/{{$arbitro->id}}/edit" class="btn btn-info">Editar</a>
-                                <button class="btn btn-danger">Borrar</button>
+                                <form action="{{route('admin.arbitros.destroy',$arbitro->id)}}" method="POST">
+                                    <a href="arbitros/{{$arbitro->id}}/edit" class="btn btn-info">Editar</a>
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger">Borrar</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach
