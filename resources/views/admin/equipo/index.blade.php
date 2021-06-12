@@ -14,6 +14,7 @@
             <a href="equipos/create" class=" mt-2 btn btn-warning">CREAR NUEVO EQUIPO</a>
         </div>
         <div class="card-body">
+            <!--TABLA CON LAS EQUIPOS -->
             <table id="equipos" class="display table table-light text-center table-striped mt-4">
                 <thead>
                     <tr>
@@ -26,6 +27,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!--PARA PODER SACAR LOS DATOS DE CADA EQUIPO, LO RECORREMOS CON UN FOREACH -->
                     @foreach ($equipos as $equipo)
                         <tr>
                             <td>{{$equipo->id}}</td>

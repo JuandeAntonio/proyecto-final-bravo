@@ -13,6 +13,7 @@ class CreateEquiposTable extends Migration
      */
     public function up()
     {
+        //CREACION DE DEFINICION DE LAS VARIABLES DE LA TABLA EQUIPOS
         Schema::create('equipos', function (Blueprint $table) {
             $table->id();
 

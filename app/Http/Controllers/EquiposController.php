@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Equipo;
-use Illuminate\Support\Facades\DB;
+use App\Models\Estadistica;
 
 use Illuminate\Http\Request;
 
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\DB;
 
 class EquiposController extends Controller
 {
@@ -42,6 +43,7 @@ class EquiposController extends Controller
      */
     public function store(Request $request)
     {
+        //EN EL REQUEST, VIENEN LOS DATOS QUE SE HAN ENVIADO DEL FORMULARIO, SE ASOCIAN AL MODELO Y SE GUARDAN
         $equipos = new Equipo();
         $equipos->nombre = $request->get('nombre');
         $equipos->direccion = $request->get('direccion');
@@ -49,6 +51,18 @@ class EquiposController extends Controller
         $equipos->liga_id = $request->get('liga_id');
 
         $equipos->save();
+        //PARA QUE AL CREAR UN EQUIPO, SE CREEN SUS ESTADISTICAS CORRESPONDIENTES
+        $estadisticasdelequipo = new Estadistica();
+        $estadisticasdelequipo->partidos_ganados = 0;
+        $estadisticasdelequipo->partidos_perdidos = 0;
+        $estadisticasdelequipo->sets_ganados = 0;
+        $estadisticasdelequipo->sets_perdidos = 0;
+        $estadisticasdelequipo->puntos = 0;
+        $telefono = $request->get('telefono');
+        $id_equipocreado = Equipo::where('telefono', "=", $telefono)->get();
+        $estadisticasdelequipo->equipo_id = $id_equipocreado[0]->id;
+
+        $estadisticasdelequipo->save();
 
         return redirect('/admin/equipos');
     }
@@ -73,6 +87,7 @@ class EquiposController extends Controller
     public function edit($id)
     {
         $equipo = Equipo::find($id);
+        //CUANDO PULSAN EN EDIT, SE LES DEVUELVE OTRA VISTA A LA QUE HEMOS PASADO UNA VARIABLE CON EL EQUIPO CON ESA ID
         return view ('admin.equipo.edit')->with('equipo',$equipo);
     }
 
@@ -110,7 +125,7 @@ class EquiposController extends Controller
         return redirect('/admin/equipos');
     }
 
-    
+    //FUNCIONES DECLARADAS PARA SACAR EL NOMBRE DE LOS EQUIPOS
     public static function nombre_equipo($equipo_id){
         $var = DB::select('select nombre from equipos where id = '.$equipo_id.';');
         return $var;

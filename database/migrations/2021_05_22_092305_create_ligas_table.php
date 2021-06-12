@@ -13,6 +13,7 @@ class CreateLigasTable extends Migration
      */
     public function up()
     {
+        //CREACION DE DEFINICION DE LAS VARIABLES DE LA TABLA LIGAS
         Schema::create('ligas', function (Blueprint $table) {
             $table->id();
 

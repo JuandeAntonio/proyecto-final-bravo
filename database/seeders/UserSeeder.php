@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        //PARA CREAR UN USUARIO EN LA BASE DE DATOS QUE SIEMPRE ESTE CUANDO HACEMOS UN MIGRATE FRESH
         User::create([
             'name' => 'Juan Antonio Garcia',
             'email' => 'juan@gmail.com',

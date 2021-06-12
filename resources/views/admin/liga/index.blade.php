@@ -19,14 +19,15 @@ use \App\Http\Controllers\PartidosController;
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Opciones</th>
+                <th scope="col">Generar Partidos</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($ligas as $liga)
                 <tr>
-                    <td>{{$liga->id}}</td>
-                    <td>{{$liga->nombre}}</td>
-                    <td>{{$liga->categoria}}</td>
+                    <td class="align-middle">{{$liga->id}}</td>
+                    <td class="align-middle">{{$liga->nombre}}</td>
+                    <td class="align-middle">{{$liga->categoria}}</td>
                     <td>
                         <form action="{{route('admin.ligas.destroy',$liga->id)}}" method="POST">
                             <a href="ligas/{{$liga->id}}/edit" class="btn btn-info">Editar</a>
@@ -34,10 +35,12 @@ use \App\Http\Controllers\PartidosController;
                             @method('DELETE')
                             <button class="btn btn-danger">Borrar</button>
                         </form>
+                    </td>
+                    <td>
                         <form action="{{route('admin.generarpartido',$liga->id)}}" method="POST">
                             @csrf
                             <input type="number" hidden value="{{$liga->id}}" name="liga_id" />
-                            <button type="submit" class="btn btn-success">Crear partidos</button> 
+                            <button type="submit" class="btn btn-success">Partidos</button> 
                         </form>
                     </td>
                 </tr>
@@ -52,7 +55,10 @@ use \App\Http\Controllers\PartidosController;
 @section('css')
     <link rel="stylesheet" href="/css/admin_custom.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-@stop
+    <style>
+        #qwe{width: 40%;}
+    </style>
+    @stop
 
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

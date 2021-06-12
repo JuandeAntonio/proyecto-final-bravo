@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Liga;
+use App\Models\Partido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -104,6 +105,13 @@ class LigasController extends Controller
 
     public static function nombres_liga(){
         $nom_liga = Liga::all();
+        //$asd = Partido::distinct()->get(['liga_id']);
+        //$qwe = Liga::where('id', $asd[0]->liga_id)->get();
+        return $nom_liga;
+    }
+
+    public static function ligas_funcionando(){
+        $nom_liga = DB::select('select * from ligas where id in (select distinct(liga_id) from partidos);');
         return $nom_liga;
     }
 }

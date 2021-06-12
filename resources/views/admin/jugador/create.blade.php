@@ -12,7 +12,7 @@
 
 <!--AQUÍ ES DONDE SE MUESTRA EL COTENIDO DE LA PAGINA -->
 @section('content')
-    <form action="/admin/equipos" method="POST">
+    <form action="/admin/jugadors" method="POST">
     @csrf
         <div class="mb-3">
             <label for="" class="form-label">Nombre</label>

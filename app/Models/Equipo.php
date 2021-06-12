@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipo extends Model
 {
+//SE ESPECIFICAN LAS RELACIONES CON OTRAS TABLAS
     use HasFactory;
     //Relacion uno a muchos
 

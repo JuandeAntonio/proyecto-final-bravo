@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//ARCHIVO DE RUTAS PARA LOS USUARIOS NO REGISTRADOS
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,7 +33,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('welcome');
 })->name('welcome');
 
-
-Auth::routes(["register" => false]);
+//ESTA LINEA PRETENDE ANULA LA RUTA REGISTER
+Auth::routes(['/register' => false]);
 
 

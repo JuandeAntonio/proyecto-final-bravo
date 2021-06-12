@@ -1,7 +1,18 @@
 @extends('layouts.plantilla_inicio')
 
 @section('tablaClasificacion')
-    <div class="container-fluid" style="background-image: url('img/fondo3.png'); background-repeat: no-repeat; height:100%">
-        <div class="row"><p class="text-center text-white pt-5 mt-5" style="font-size:5em"><strong>BIENVENIDOS A TODO VOLEIBOL</strong></p></div>
-    </div>
+<style>
+    .abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin-top: -2em;
+}
+
+</style>
+<!--LA PAGINA DE INICIO, SEGUN ACCEDES -->
+<h1 class="text-center text-white"><strong>BIENVENIDOS A TODO VOLEIBOL</strong></h1>
+    <div class="abs-center"><img src="/img/fondo4.png" class="img-fluid" alt="Responsive image"></div>
 @endsection
+

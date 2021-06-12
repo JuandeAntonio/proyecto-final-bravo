@@ -13,6 +13,7 @@ class CreateArbitrosTable extends Migration
      */
     public function up()
     {
+        //CREACION DE DEFINICION DE LAS VARIABLES DE LA TABLA ARBITROS
         Schema::create('arbitros', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_guerra',20);

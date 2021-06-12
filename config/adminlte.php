@@ -339,7 +339,7 @@ return [
             'url'        => '/admin/asignaciones',
             'can' => 'Asignaciones'
         ],
-        [
+        /*[
             'text'       => 'warning',
             'icon_color' => 'yellow',
             'url'        => '#',
@@ -350,7 +350,7 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
             'can' => 'Asignaciones'
-        ],
+        ],*/
     ],
 
     /*

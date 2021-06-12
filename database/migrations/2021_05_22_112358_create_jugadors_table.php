@@ -13,6 +13,7 @@ class CreateJugadorsTable extends Migration
      */
     public function up()
     {
+        //CREACION DE DEFINICION DE LAS VARIABLES DE LA TABLA JUGADORES
         Schema::create('jugadors', function (Blueprint $table) {
             $table->id();
 

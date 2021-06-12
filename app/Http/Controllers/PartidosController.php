@@ -99,6 +99,7 @@ class PartidosController extends Controller
     {
         //
     }
+    //ESTA PRECIOSA FUNCIÓN GENERA LOS PARTIDOS DE UNA LIGA SI TIENE LOS 8 EQUIPOS
     public static function generar_partidos(Request $request){
 
         $ligas = Liga::all();
@@ -117,7 +118,7 @@ class PartidosController extends Controller
             $id = $equipo->id;
             array_push($equipos, $id);
         }
-        
+        //ESTE ES EL ORDEN DE COMO SE VAN A ENFRENTAR LOS EQUIPOS, SON 7 JORNADAS DE IDA Y 7 DE VUELTA
         $orden = [
             0 => [1,2,8,3,7,4,6,5],
             1 => [3,1,4,2,5,8,6,7],
@@ -127,18 +128,21 @@ class PartidosController extends Controller
             5 => [7,1,8,6,2,5,3,4],
             6 => [1,8,7,2,6,3,5,4]
         ];
+        //CODIGO FUNDAMENTAL PARA CONTROLAR ERRORES Y VER EL CONTENIDO DE LAS VARIABLES
         /*
         return Response::json(array(
             'succes' => true,
             'data' => $qweqwe->isNotEmpty()
         ), 200);*/
-
+        //SI YA HAY PARTIDOS GENERADOS, NO SE EJECUTA, PARA NO SOBREESCRIBIR LOS PARTIDOS
         if($qweqwe->isNotEmpty()){
             return view("admin.liga.index")->with('mensaje', $mensaje_error_partidos)->with('ligas', $ligas);
         }
+        //SI NO TIENE 8 EQUIPOS JUSTOS TAMPOCO SE EJECUTA
         elseif($numero != 8){
             return view("admin.liga.index")->with('mensaje', $mensaje_error_equipos)->with('ligas', $ligas);;
         }
+        //SI TODO ESTÁ BIEN, SE LANZA ESTA PRECIOSIDAD.
         else{
             for($i=0; $i<7; $i++){
                 DB::insert("INSERT INTO `partidos` VALUES (NULL, '" . $i+1 . "', '2021-10-02', '9:00', '0', '0', '0', '0', '".$id_liga."', '".$equipos[($orden[$i][0])-1]."', '".$equipos[($orden[$i][1])-1]."', '1', NULL, NULL);");
@@ -146,7 +150,7 @@ class PartidosController extends Controller
                 DB::insert("INSERT INTO `partidos` VALUES (NULL, '" . $i+1 . "', '2021-10-02', '9:00', '0', '0', '0', '0', '".$id_liga."', '".$equipos[($orden[$i][4])-1]."', '".$equipos[($orden[$i][5])-1]."', '1', NULL, NULL);");
                 DB::insert("INSERT INTO `partidos` VALUES (NULL, '" . $i+1 . "', '2021-10-02', '9:00', '0', '0', '0', '0', '".$id_liga."', '".$equipos[($orden[$i][6])-1]."', '".$equipos[($orden[$i][7])-1]."', '1', NULL, NULL);");
             }
-        
+        //AQUÍ SE LE DA LA VUELVA AL ARRAY DE ORDEN PARA GENERAR LOS PARTIDOS DE VUELTA
             for($i=0; $i<7; $i++){
                 $orden[$i] = array_reverse($orden[$i]);
             }
@@ -160,6 +164,7 @@ class PartidosController extends Controller
         }
         //return redirect('/admin/partidos');
     }
+    /*
     public static function genpar($id){
         if($id > 5){
             return "Kobe Bryant";
@@ -170,5 +175,5 @@ class PartidosController extends Controller
         else{
             return "";
         }
-    }
+    }*/
 }

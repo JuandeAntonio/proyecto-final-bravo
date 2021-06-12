@@ -2,8 +2,9 @@
 @extends('layouts.plantilla_inicio')
 
 @section('tablaClasificacion')
-    <h1 class="text-center text-uppercase">CLASIFICACIÓN DE {{$nombreliga}}</h1>
-    <table class="table table-light table-striped mt-4 text-center">
+<!--AQUÍ APARECE LA CLASIFICACIÓN DE LA LIGA SELECCIONADA -->
+    <h1 class="text-center text-uppercase text-white">CLASIFICACIÓN DE {{$nombreliga}}</h1>
+    <table class="table table-light table-striped mt-4 pr-3 text-center">
         <thead class="table-warning">
             <tr>
                 <th scope="col">Nombre</th>
@@ -11,7 +12,6 @@
                 <th scope="col" class="text-center">Pardidos Perdidos</th>
                 <th scope="col">Sets Ganados</th>
                 <th scope="col">Sets Perdidos</th>
-                <th scope="col">ID Equipo</th>
                 <th scope="col">Puntos</th>
             </tr>
         </thead>
@@ -23,16 +23,15 @@
                     <td>{{$estadistica->partidos_perdidos}}</td>
                     <td>{{$estadistica->sets_ganados}}</td>
                     <td>{{$estadistica->sets_perdidos}}</td>
-                    <td>{{$estadistica->equipo_id}}</td>
                     <td>{{$estadistica->puntos}}</td>
                 </tr>
             @endforeach
         </tbody>    
     </table>
-
+    <!--POR CADA JORNADA DE LA LIGA, SE CREA UNA TABLA CON LOS PARTIDOS DE ESA JORNADA Y LOS RESULTADOS -->
     @for ($i = 1; $i < 15; $i++)
         <table class="table table-light table-striped table-bordered mt-4 text-center">
-            <h2 class="text-center">Jornada {{$i}} </h2>
+            <h2 class="text-center text-white">Jornada {{$i}} </h2>
             <thead class="table-info">
                 <tr>
                     <th scope="col">Equipo Local</th>

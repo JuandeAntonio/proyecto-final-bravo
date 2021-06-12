@@ -9,6 +9,7 @@
 <!--AQUÍ ES DONDE SE MUESTRA EL COTENIDO DE LA PAGINA -->
 @section('content')
     <form action="/admin/equipos/{{$equipo->id}}" method="POST">
+    <!--IMPORTANTE ESTE @ PARA QUE SE ENVIEN LOS DATOS DE MANERA SEGURA Y NO DE ERROR -->
     @csrf
     @method('PUT')
     <div class="mb-3">
@@ -27,6 +28,7 @@
             <label for="" class="form-label">Liga ID</label>
             <input type="text" class="form-control" id="liga_id" name="liga_id" value="{{$equipo->liga_id}}">
         </div>
+        <!--BOTONES PARA CANCELAR QUE TE DEVUELVE A LA PAGINA ANTERIOR Y EL SUBMIT QUE ENVIA LOS DATOS A LA RUTA DEL ACTION -->
         <a href="/admin/equipos" class="btn btn-secondary" tabindex="4">Cancelar</a>
         <button type="submit" class="btn btn-primary" tabindex="3">Guardar</button>
     </form>

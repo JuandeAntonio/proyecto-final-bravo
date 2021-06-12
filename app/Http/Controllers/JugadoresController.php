@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Partido;
 use App\Models\Jugador;
+use App\Models\Partido;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 
 class JugadoresController extends Controller
@@ -37,16 +38,22 @@ class JugadoresController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {/*
         $equipos = new Jugador();
         $equipos->nombre = $request->get('nombre');
         $equipos->apellidos = $request->get('apellidos');
         $equipos->dorsal = $request->get('dorsal');
         $equipos->equipo_id = $request->get('equipo_id');
 
-        $equipos->save();
+        $equipos->save();*/
 
-        return redirect('/admin/jugadors');
+        
+        return Response::json(array(
+            'succes' => true,
+            'data' => $request->all()
+        ), 200);
+
+        //return redirect('/admin/jugadors');
     }
 
     /**

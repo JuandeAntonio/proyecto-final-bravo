@@ -16,13 +16,14 @@ class EstadisticasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index($nombreliga)
-    {   
+    {   //DEBERIA DE SER UN CONTROLADOR NORMAL....INTENTAD USAR MAS LOS MODELOS DE ELOQUENT
         $idlg = DB::select("select id from ligas where nombre like '".$nombreliga."';");
         $idliga = $idlg[0]->id;
         $numjor = DB::select('select count(distinct jornada) as num from partidos where liga_id = '.$idliga.';'); 
         $numerojornadas = $numjor[0]->num;      
         $var = DB::select('select * from estadisticas where equipo_id in (select id from equipos where liga_id in (select id from ligas where nombre like "'.$nombreliga.'")) order by puntos desc;');
         $todaslasjornadas = [];
+        //SE ENVIAN LAS JORNADAS EN UN ARRAY
         for($i=0; $i<=$numerojornadas; $i++){
             $consulta = DB::select("select * from partidos where liga_id = ".$idliga." and jornada = ".$i.";");
             array_push($todaslasjornadas,$consulta);
@@ -30,7 +31,7 @@ class EstadisticasController extends Controller
         /*
         return Response::json(array(
             'succes' => true,
-            'data' => $todaslasjornadas[1][0]
+            'data' => $numerojornadas
         ), 200);*/
 
         return view('clasificaciones.index')->with('estadisticas', $var)->with('nombreliga',$nombreliga)->with('todaslasjornadas',$todaslasjornadas);

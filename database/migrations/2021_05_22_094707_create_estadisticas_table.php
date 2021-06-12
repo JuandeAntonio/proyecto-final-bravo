@@ -13,6 +13,7 @@ class CreateEstadisticasTable extends Migration
      */
     public function up()
     {
+        //CREACION DE DEFINICION DE LAS VARIABLES DE LA TABLA ESTADISTICAS
         Schema::create('estadisticas', function (Blueprint $table) {
             $table->id();
             $table->integer('partidos_ganados');

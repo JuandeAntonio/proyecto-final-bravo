@@ -15,6 +15,7 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
+        //CREACION DE LOS ROLES Y PERMISOS
         $role1 = Role::create(['name' => 'Admin']);
         $role2 = Role::create(['name' => 'Arbitro']);
 

@@ -1,3 +1,4 @@
+<!--PLANTILLAS DE ADMIN. DE AQUÍ VAN A HEREDAR TODAS LAS VISTAS DE ADMIN -->
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
@@ -8,7 +9,7 @@
 
 <!--AQUÍ ES DONDE SE MUESTRA EL COTENIDO DE LA PAGINA -->
 @section('content')
-    <p id="men"> BIENVENIDO </P>
+    <h1 class="text-center mt-5"> BIENVENIDO </br> {{Auth::user()->name}}</h1>
 @stop
 
 @section('css')
